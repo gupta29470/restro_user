@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1023224939419",
+    "project_id": "restro-user",
+    "storage_bucket": "restro-user.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1023224939419:android:1b8910651b9fa00796573e",
+        "android_client_info": {
+          "package_name": "com.example.restro_user"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1023224939419-l8kdia97ks09q64mk0568aaisnva8gmm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.restro_user",
+            "certificate_hash": "3d858ab9293c27e33735baa065a042edc222f3ea"
+          }
+        },
+        {
+          "client_id": "1023224939419-1bivbg56t94isruffdifkpbgmf31ddfv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCbJpnSw07O0eL2M50SVGfuZ790YNMkx60"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1023224939419-1bivbg56t94isruffdifkpbgmf31ddfv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
