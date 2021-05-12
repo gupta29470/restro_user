@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:geocoding/geocoding.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import '../models/restaurant.dart';
-import '../services/restaurant_service.dart';
+import '../widgets/loading_text_widget.dart';
+import '../services/firestore_service.dart';
+import 'restaurant_screen.dart';
+import '../providers/auth_provider.dart';
+import '../widgets/custom_loading_indicator.dart';
+import '../widgets/restaurants_containers_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key key}) : super(key: key);
@@ -19,7 +22,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   Position _currentPosition;
-  String _currentAddress;
 
   double userLat;
   double userLon;
@@ -33,6 +35,17 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Restro"),
+        centerTitle: true,
+        actions: [
+          TextButton(
+            onPressed: () =>
+                AuthProvider.authServiceInstance.signOutAnonymously(),
+            child: Text(
+              "LOGOUT",
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+        ],
       ),
       body: _buildRestaurant(),
     );
@@ -66,26 +79,10 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  _getAddressFromLatLng(double latitude, double longitude) async {
-    try {
-      List<Placemark> placemarks =
-          await placemarkFromCoordinates(latitude, longitude);
-
-      Placemark place = placemarks[0];
-
-      setState(() {
-        _currentAddress =
-            "${place.name}, ${place.locality}, ${place.postalCode}, ${place.country}";
-      });
-    } catch (e) {
-      print(e);
-    }
-  }
-
   Widget _buildRestaurant() {
     _getCurrentLocation();
     return StreamBuilder<List<Restaurant>>(
-      stream: RestaurantService.restaurantServiceInstance.getAllRestaurants(
+      stream: FirestoreService.firestoreServiceInstance.getAllRestaurants(
         userLat,
         userLon,
         HomeScreen.lowerLat,
@@ -95,111 +92,48 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          final data = snapshot.data;
-          return SingleChildScrollView(
-            child: Container(
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Text(
-                      "Nearby Restaurants",
-                      style: TextStyle(
-                        fontSize: 24.0,
-                        fontWeight: FontWeight.w600,
-                        letterSpacing: 1.2,
-                      ),
-                    ),
+          List<Restaurant> data = snapshot.data;
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Text(
+                  "Nearby Restaurants",
+                  style: TextStyle(
+                    fontSize: 24.0,
+                    fontWeight: FontWeight.w600,
+                    letterSpacing: 1.2,
                   ),
-                  ListView.builder(
-                    scrollDirection: Axis.vertical,
-                    shrinkWrap: true,
-                    itemCount: data.length,
-                    itemBuilder: (context, index) {
-                      if (data[index] != null) {
-                        _getAddressFromLatLng(
-                            data[index].latitude, data[index].longitude);
-                      }
-                      return data[index] != null
-                          ? Container(
-                              margin: const EdgeInsets.symmetric(
-                                  horizontal: 20, vertical: 10),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(15.0),
-                                border: Border.all(
-                                  width: 1.0,
-                                  color: Colors.white,
+                ),
+              ),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: data.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    Restaurant restaurant = data[index];
+                    return data[index] != null
+                        ? GestureDetector(
+                            onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => RestaurantScreen(
+                                  restaurant: restaurant,
                                 ),
                               ),
-                              child: Row(
-                                children: <Widget>[
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.circular(15.0),
-                                    child: Hero(
-                                      tag: data[index].logoURL,
-                                      child: Image(
-                                        height: 150,
-                                        width: 150,
-                                        image:
-                                            NetworkImage(data[index].logoURL),
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                  ),
-                                  Expanded(
-                                    child: Container(
-                                      margin: const EdgeInsets.all(12),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: <Widget>[
-                                          Text(
-                                            data[index].restaurantName,
-                                            style: TextStyle(
-                                              fontSize: 20.0,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                            overflow: TextOverflow.ellipsis,
-                                          ),
-                                          if (_currentAddress != null)
-                                            Text(
-                                              _currentAddress,
-                                              overflow: TextOverflow.ellipsis,
-                                              style: TextStyle(
-                                                fontSize: 16.0,
-                                                fontWeight: FontWeight.w600,
-                                              ),
-                                            ),
-                                          SizedBox(height: 4.0),
-                                          Text(
-                                            '0.2 miles away',
-                                            style: TextStyle(
-                                              fontSize: 16.0,
-                                              fontWeight: FontWeight.w600,
-                                            ),
-                                            overflow: TextOverflow.ellipsis,
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            )
-                          : Container(
-                              color: Colors.indigoAccent,
-                            );
-                    },
-                  )
-                ],
-              ),
-            ),
+                            ),
+                            child: RestaurantsContainerWidget(
+                              logoURL: data[index].logoURL,
+                              restaurantName: data[index].restaurantName,
+                            ),
+                          )
+                        : Container(
+                            color: Colors.indigoAccent,
+                          );
+                  },
+                ),
+              )
+            ],
           );
         } else {
           return Container(
@@ -207,23 +141,10 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  SpinKitPouringHourglass(
-                    color: Colors.deepOrangeAccent,
-                    size: 100.0,
-                  ),
-                  Text(
-                    "Fetching Restaurants",
-                    style: TextStyle(
-                      fontSize: 32.0,
-                      color: Colors.black54,
-                    ),
-                  ),
-                  Text(
-                    "Please wait...",
-                    style: TextStyle(
-                      fontSize: 16.0,
-                      color: Colors.black54,
-                    ),
+                  CustomLoadingIndicator.customLoadingIndicator(100),
+                  LoadingTextWidget(
+                    text1: "Fetching Restaurants",
+                    text2: "Please Wait...",
                   ),
                 ],
               ),

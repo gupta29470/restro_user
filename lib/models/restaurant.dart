@@ -20,8 +20,7 @@ class Restaurant {
     this.position,
   });
 
-  factory Restaurant.fromJSON(Map<dynamic, dynamic> data) {
-
+  factory Restaurant.fromFirestore(Map<dynamic, dynamic> data) {
     if (data != null) {
       if (data["latitude"] < HomeScreen.lowerLat) {
         data["latitude"] = 0;
@@ -48,5 +47,17 @@ class Restaurant {
       }
     }
     return null;
+
+    /*
+    return data != null?
+    Restaurant(
+      id: data["id"],
+      restaurantName: data["restaurantName"],
+      latitude: data["latitude"],
+      longitude: data["longitude"],
+      logoURL: data["logoURL"],
+      position: data["position"],
+    ) : null;
+      */
   }
 }
