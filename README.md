@@ -14,5 +14,5 @@
 
  ## Anonymous Sign in
 <p align="center">
-    <img width="300" height="600" src="Screenshots/1.jpg">
+    <img width="300" height="600" src="Screenshots/1.png">
 </p>
