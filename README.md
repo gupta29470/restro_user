@@ -1,11 +1,6 @@
 # Restro
 
-> Restro fetches all restaurants with in **20 miles** available in database using user's location, shows categories and menus for each 
-> restaurants and also allow to order food from given menu.
-
-<br/>
-
-> Restro is an android application built using **Flutter** and **Firebase**.
+> Retro is an android application that fetches all restaurants within 20 miles available in the database using the user's location, shows categories and menus for each restaurant, and orders food from the given menu.
 
 <br/>
 
