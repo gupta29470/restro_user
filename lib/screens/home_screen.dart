@@ -29,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   double lat = 0.0144927536231884;
   double lon = 0.0181818181818182;
-  double distance = 1000;
+  double distance = 20;
 
   @override
   Widget build(BuildContext context) {
