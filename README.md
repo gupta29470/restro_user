@@ -1,16 +1,12 @@
-# restro_user
+# Restro
 
-A new Flutter project.
+> Restro fetches all restaurants with in **20 miles** available in database using user's location, shows categories and menus for each 
+> restaurants and also allow to order food from given menu.
 
-## Getting Started
+<br/><br/>
 
-This project is a starting point for a Flutter application.
+> Restro is an android application built using **Flutter** and **Firebase**.
 
-A few resources to get you started if this is your first Flutter project:
+<br/><br/>
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+> A glimpse of **Restro**.
