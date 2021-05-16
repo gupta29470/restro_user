@@ -6,12 +6,12 @@ class Menu {
   final List<dynamic> itemImages;
   final List<dynamic> itemPrices;
 
-  Menu({
-    @required this.category,
-    @required this.itemNames,
-    @required this.itemImages,
-    this.itemPrices,
-  });
+  Menu(
+      {@required this.category,
+      @required this.itemNames,
+      @required this.itemImages,
+      @required this.itemPrices,
+      });
 
   factory Menu.fromFirestore(Map<dynamic, dynamic> data) {
     return data != null

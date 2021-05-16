@@ -52,65 +52,65 @@ class _DateTimePickerWidgetState extends State<DateTimePickerWidget> {
 
   Row _buildDateRowWidget() {
     return Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Container(
-              height: 50,
-              width: 130,
-              child: MaterialButton(
-                onPressed: widget.selectDate,
-                color: Colors.deepOrangeAccent,
-                child: Text(
-                  "Select Date",
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            ),
-            Text(
-              "${DateTimeFormat.date(widget.selectedDate)}",
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Container(
+          height: 50,
+          width: 130,
+          child: MaterialButton(
+            onPressed: widget.selectDate,
+            color: Colors.deepOrangeAccent,
+            child: Text(
+              "Select Date",
               style: TextStyle(
-                color: Colors.deepOrangeAccent,
-                fontSize: 25,
-                fontWeight: FontWeight.bold,
+                fontSize: 15,
+                fontWeight: FontWeight.w700,
+                color: Colors.white,
               ),
             ),
-          ],
-        );
+          ),
+        ),
+        Text(
+          "${DateTimeFormat.date(widget.selectedDate)}",
+          style: TextStyle(
+            color: Colors.deepOrangeAccent,
+            fontSize: 25,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ],
+    );
   }
 
   Row _buildTimeRowWidget() {
     return Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Container(
-              height: 50,
-              width: 130,
-              child: MaterialButton(
-                onPressed: widget.selectTime,
-                color: Colors.deepOrangeAccent,
-                child: Text(
-                  "Select Time",
-                  style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w700,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            ),
-            Text(
-              "${DateTimeFormat.hours(widget.selectedTime.hour.toDouble())} ${widget.selectedTime.minute}m",
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Container(
+          height: 50,
+          width: 130,
+          child: MaterialButton(
+            onPressed: widget.selectTime,
+            color: Colors.deepOrangeAccent,
+            child: Text(
+              "Select Time",
               style: TextStyle(
-                color: Colors.deepOrangeAccent,
-                fontSize: 25,
-                fontWeight: FontWeight.bold,
+                fontSize: 15,
+                fontWeight: FontWeight.w700,
+                color: Colors.white,
               ),
             ),
-          ],
-        );
+          ),
+        ),
+        Text(
+          "${DateTimeFormat.hours(widget.selectedTime.hour.toDouble())} ${widget.selectedTime.minute}m",
+          style: TextStyle(
+            color: Colors.deepOrangeAccent,
+            fontSize: 25,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ],
+    );
   }
 }

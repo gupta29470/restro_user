@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import '../providers/auth_provider.dart';
 import 'auth_screen.dart';
 import 'home_screen.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
+import '../widgets/custom_loading_indicator.dart';
 
 class LandingScreen extends StatelessWidget {
   @override
@@ -22,10 +22,7 @@ class LandingScreen extends StatelessWidget {
             return HomeScreen();
           }
         } else {
-          return SpinKitPouringHourglass(
-            color: Colors.deepOrangeAccent,
-            size: 100,
-          );
+          return CustomLoadingIndicator.customLoadingIndicator(100);
         }
       },
     );

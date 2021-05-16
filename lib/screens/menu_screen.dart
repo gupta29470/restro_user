@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../services/firestore_service.dart';
 import '../models/menu.dart';
 import '../widgets/menus_container_widget.dart';
-import '../widgets/custom_loading_indicator.dart';
 import '../widgets/loading_text_widget.dart';
+import '../widgets/loading_widget.dart';
 
 class MenuScreen extends StatefulWidget {
   final String restaurantName;
@@ -46,7 +46,7 @@ class _MenuScreenState extends State<MenuScreen> {
             List<dynamic> itemNames = data[index].itemNames;
             List<dynamic> itemImages = data[index].itemImages;
             List<dynamic> itemPrices = data[index].itemPrices;
-            if (itemImages != null && itemNames != null) {
+            if (itemImages != null   && itemNames != null) {
               return Expanded(
                 child: GridView.count(
                   crossAxisCount: 2,
@@ -83,18 +83,9 @@ class _MenuScreenState extends State<MenuScreen> {
           }
         }
         return Expanded(
-          child: Container(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                CustomLoadingIndicator.customLoadingIndicator(100),
-                LoadingTextWidget(
-                  text1: "Fetching Menus",
-                  text2: "Please Wait...",
-                ),
-              ],
-            ),
+          child: LoadingWidget(
+            text1: "Fetching Menus",
+            text2: "Please Wait...",
           ),
         );
       },

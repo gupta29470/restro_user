@@ -47,17 +47,19 @@ class Restaurant {
       }
     }
     return null;
-
-    /*
-    return data != null?
-    Restaurant(
-      id: data["id"],
-      restaurantName: data["restaurantName"],
-      latitude: data["latitude"],
-      longitude: data["longitude"],
-      logoURL: data["logoURL"],
-      position: data["position"],
-    ) : null;
-      */
   }
-}
+
+/*
+    return data != null
+        ? Restaurant(
+            id: data["id"],
+            restaurantName: data["restaurantName"],
+            latitude: data["latitude"],
+            longitude: data["longitude"],
+            logoURL: data["logoURL"],
+            position: data["position"],
+          )
+        : null;
+  }
+ */
+  }

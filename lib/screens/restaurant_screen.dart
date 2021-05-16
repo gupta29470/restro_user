@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 
+
 import '../models/restaurant.dart';
 import '../models/category.dart';
 import '../services/firestore_service.dart';
 import '../widgets/display_restaurant_image_widget.dart';
 import '../widgets/display_restaurant_name_widget.dart';
-import '../widgets/custom_loading_indicator.dart';
 import '../widgets/loading_text_widget.dart';
 import '../widgets/categories_container_widget.dart';
+import '../widgets/loading_widget.dart';
 
 class RestaurantScreen extends StatefulWidget {
   final Restaurant restaurant;
@@ -98,20 +99,7 @@ class _RestaurantScreenState extends State<RestaurantScreen> {
             }
           }
         }
-        return Container(
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                CustomLoadingIndicator.customLoadingIndicator(70),
-                LoadingTextWidget(
-                  text1: "Fetching Categories",
-                  text2: "Please Wait...",
-                ),
-              ],
-            ),
-          ),
-        );
+        return LoadingWidget();
       },
     );
   }

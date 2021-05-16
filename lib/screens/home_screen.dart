@@ -8,6 +8,7 @@ import 'restaurant_screen.dart';
 import '../providers/auth_provider.dart';
 import '../widgets/custom_loading_indicator.dart';
 import '../widgets/restaurants_containers_widget.dart';
+import '../widgets/loading_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key key}) : super(key: key);
@@ -28,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   double lat = 0.0144927536231884;
   double lon = 0.0181818181818182;
-  double distance = 10;
+  double distance = 1000;
 
   @override
   Widget build(BuildContext context) {
@@ -136,19 +137,9 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           );
         } else {
-          return Container(
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  CustomLoadingIndicator.customLoadingIndicator(100),
-                  LoadingTextWidget(
-                    text1: "Fetching Restaurants",
-                    text2: "Please Wait...",
-                  ),
-                ],
-              ),
-            ),
+          return LoadingWidget(
+            text1: "Fetching Restaurants",
+            text2: "Please Wait...",
           );
         }
       },
