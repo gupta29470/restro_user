@@ -1,6 +1,6 @@
 # Restro
 
-> Retro is an android application that fetches all restaurants within 20 miles available in the database using the user's location, shows categories and menus for each restaurant, and orders food from the given menu.
+> Restro is an android application that fetches all restaurants within 20 miles available in the database using the user's location, shows categories and menus for each restaurant, and orders food from the given menu.
 
 <br/>
 
