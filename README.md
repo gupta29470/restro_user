@@ -36,7 +36,7 @@
 <br/><br/>
 
 
-## If restaurant does not added categories.
+## If restaurant doesn't have categories.
 <p align="center">
     <img width="300" height="600" src="Screenshots/4.png">
 </p>
